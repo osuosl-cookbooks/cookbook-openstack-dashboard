@@ -191,7 +191,8 @@ template node['openstack']['dashboard']['apache']['sites-path'] do
 
   variables(
     ssl_cert_file: "#{node["openstack"]["dashboard"]["ssl"]["dir"]}/certs/#{node["openstack"]["dashboard"]["ssl"]["cert"]}",
-    ssl_key_file: "#{node["openstack"]["dashboard"]["ssl"]["dir"]}/private/#{node["openstack"]["dashboard"]["ssl"]["key"]}"
+    ssl_key_file: "#{node["openstack"]["dashboard"]["ssl"]["dir"]}/private/#{node["openstack"]["dashboard"]["ssl"]["key"]}",
+    ssl_chain_file: "#{node["openstack"]["dashboard"]["ssl"]["dir"]}/certs/#{node["openstack"]["dashboard"]["ssl"]["chain"]}"
   )
 
   notifies :run, 'execute[restore-selinux-context]', :immediately

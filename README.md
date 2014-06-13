@@ -41,6 +41,7 @@ Attributes
 * `openstack["dashboard"]["ssl"]["dir"]` - directory where ssl certs are stored on this system
 * `openstack["dashboard"]["ssl"]["cert"]` - name to use when creating the ssl certificate
 * `openstack["dashboard"]["ssl"]["key"]` - name to use when creating the ssl key
+* `openstack["dashboard"]["ssl"]["chain"]` - name to use when using an ssl intermediary certificate chain
 * `openstack["dashboard"]["dash_path"]` - base path for dashboard files (document root)
 * `openstack["dashboard"]["wsgi_path"]` - path for wsgi dir
 * `openstack["dashboard"]["wsgi_socket_prefix"]` - Location that will override the standard Apache runtime directory

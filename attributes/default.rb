@@ -38,6 +38,7 @@ default['openstack']['dashboard']['server_hostname'] = nil
 default['openstack']['dashboard']['use_ssl'] = true
 default['openstack']['dashboard']['ssl']['cert'] = 'horizon.pem'
 default['openstack']['dashboard']['ssl']['key'] = 'horizon.key'
+default['openstack']['dashboard']['ssl']['chain'] = nil
 
 # List of hosts/domains the dashboard can serve. This should be changed, a '*'
 # allows everything
