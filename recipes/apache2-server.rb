@@ -74,18 +74,21 @@ file "#{node['apache']['dir']}/conf.d/openstack-dashboard.conf" do
   only_if { platform_family?('rhel') } # :pragma-foodcritic: ~FC024 - won't fix this
 end
 
-ssl_cert = secret('certs', node['openstack']['dashboard']['ssl']['cert'])
-ssl_key = secret('certs', node['openstack']['dashboard']['ssl']['key'])
-ssl_chain = unless node['openstack']['dashboard']['ssl']['chain'].nil?
-              secret('certs', node['openstack']['dashboard']['ssl']['chain'])
-            end
+if node['openstack']['dashboard']['ssl']['use_data_bag']
+  ssl_cert = secret('certs', node['openstack']['dashboard']['ssl']['cert'])
+  ssl_key = secret('certs', node['openstack']['dashboard']['ssl']['key'])
+  ssl_chain = unless node['openstack']['dashboard']['ssl']['chain'].nil?
+                secret('certs', node['openstack']['dashboard']['ssl']['chain'])
+              end
+end
 ssl_cert_file = File.join(node['openstack']['dashboard']['ssl']['cert_dir'], node['openstack']['dashboard']['ssl']['cert'])
 ssl_key_file = File.join(node['openstack']['dashboard']['ssl']['key_dir'], node['openstack']['dashboard']['ssl']['key'])
 ssl_chain_file = unless node['openstack']['dashboard']['ssl']['chain'].nil?
                    File.join(node['openstack']['dashboard']['ssl']['cert_dir'], node['openstack']['dashboard']['ssl']['chain'])
                  end
 
-if node['openstack']['dashboard']['use_ssl']
+if node['openstack']['dashboard']['use_ssl'] &&
+   node['openstack']['dashboard']['ssl']['use_data_bag']
   unless ssl_cert_file == ssl_key_file
     cert_mode = 00644
     cert_owner = 'root'
