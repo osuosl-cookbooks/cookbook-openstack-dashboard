@@ -75,6 +75,23 @@ describe 'openstack-dashboard::horizon' do
           end
         end
 
+        context 'custom variables' do
+          before do
+            node.set['openstack']['dashboard']['misc_custom_variables'] = {
+                'variable1' => 'value1',
+                'variable2' => 'value2'
+              }
+          end
+
+          it 'sets custom variables properly' do
+            [
+               %r{^variable1 = value1$},
+               %r{^variable2 = value2$}
+            ].each do |content|
+              expect(chef_run).to render_file(file.name).with_content(content)
+            end
+          end
+        end
         context 'debug setting' do
           context 'set to true' do
             before do

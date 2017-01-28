@@ -651,6 +651,13 @@ mod.INSTALLED_APPS += ('<%= p %>', )
 <% end %>
 <% end %>
 
+<% if node['openstack']['dashboard']['misc_custom_variables'] %>
+# Allow for misc custom variables to be added
+<% node['openstack']['dashboard']['misc_custom_variables'].each do |key,value| %>
+<%= key %> = <%= value %>
+<% end %>
+<% end %>
+
 # define a custom tmp upload directory (override /tmp)
 <% if node["openstack"]["dashboard"]["file_upload_temp_dir"] %>
 FILE_UPLOAD_TEMP_DIR = "<%= node["openstack"]["dashboard"]["file_upload_temp_dir"] %>"
