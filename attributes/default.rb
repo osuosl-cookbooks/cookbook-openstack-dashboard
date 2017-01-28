@@ -233,3 +233,17 @@ default['openstack']['dashboard']['neutron']['enable_lb'] = false
 #    'varable2': 'value2',
 #  }
 default['openstack']['dashboard']['misc_local_settings'] = nil
+
+# Allow for misc custom variables to be added to the local_settings template
+# For example:
+# ['openstack']['dashboard']['misc_custom_variables'] =
+#   {
+#       custom_variable_a => 'value_a'
+#       custom_variable_b => 'value_b'
+#   }
+#
+# will generate:
+#
+# custom_variable_a = 'value_a'
+# custom_variable_b = 'value_b'
+default['openstack']['dashboard']['misc_custom_variables'] = nil
