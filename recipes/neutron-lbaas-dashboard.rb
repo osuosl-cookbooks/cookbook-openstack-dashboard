@@ -1,7 +1,9 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dashboard
+# Cookbook:: openstack-dashboard
 # Recipe:: neutron-lbaas-dashboard
+#
+# Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +33,7 @@ when 'rhel'
   remote_file "#{django_path}/openstack_dashboard/local/enabled/_1481_project_ng_loadbalancersv2_panel.py" do
     source 'https://opendev.org/openstack/neutron-lbaas-dashboard/raw/branch/stable/rocky/neutron_lbaas_dashboard/enabled/_1481_project_ng_loadbalancersv2_panel.py'
     owner 'root'
-    mode 0o0644
+    mode '644'
     notifies :run, 'execute[openstack-dashboard collectstatic]'
   end
 end

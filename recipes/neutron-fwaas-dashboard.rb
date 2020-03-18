@@ -1,7 +1,9 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-dashboard
+# Cookbook:: openstack-dashboard
 # Recipe:: neutron-lbaas-dashboard
+#
+# Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +36,7 @@ when 'rhel'
     remote_file "#{django_path}/openstack_dashboard/local/enabled/#{file}" do
       source "https://opendev.org/openstack/neutron-fwaas-dashboard/raw/branch/stable/rocky/neutron_fwaas_dashboard/enabled/#{file}"
       owner 'root'
-      mode 0o0644
+      mode '644'
       notifies :run, 'execute[neutron-fwaas-dashboard compilemessages]'
       notifies :run, 'execute[openstack-dashboard collectstatic]'
     end
@@ -43,7 +45,7 @@ when 'rhel'
   remote_file "#{policy_file_path}/neutron-fwaas-policy.json" do
     source 'https://opendev.org/openstack/neutron-fwaas-dashboard/raw/branch/stable/rocky/etc/neutron-fwaas-policy.json'
     owner 'root'
-    mode 0o0644
+    mode '644'
     notifies :run, 'execute[neutron-fwaas-dashboard compilemessages]'
     notifies :run, 'execute[openstack-dashboard collectstatic]'
     notifies :restart, 'service[apache2]', :delayed
